@@ -8,12 +8,12 @@
 
     root
         ├── client
-        │   ├── app         # can be used for append test
+        │   ├── app         # can be used for an append test
         │   ├── client.c    # client source code
         │   ├── empty       # general file
         │   └── rmF         # general file
         ├── server
-        │   ├── apps        # can be used for append test
+        │   ├── apps        # can be used for an append test
         │   ├── empty       # general file
         │   ├── rms         # general file
         │   ├── server.c    # server source code
@@ -31,7 +31,7 @@
 
 ### Cygwin Environment (Windows)
 
-> *cygwin env must be in the path, otherwise run following command in cygwin terminal*
+> *Cygwin env must be in the path, otherwise run following command in Cygwin terminal*
 
 - Server: `gcc server.c -o server.exe`
 - Client: `gcc client.c -o client.exe`
@@ -40,7 +40,7 @@
 
 ## 2. Run
 
-> Go to the directory which contains the programs, running in Windows CMD needs to remove "./"
+> Go to the directory which contains the programs; if running in Windows CMD, "./" needs to be removed
 
 - Server: `./server [port]`
   - *e.g: `./server 5005`*
@@ -63,7 +63,7 @@
 
 > The file transfer protocol described in RFC 913 (<https://tools.ietf.org/html/rfc913>)
 >
->> *Because arguments are sparerated by space, the program does not support the path that contains space character*
+>> *Because arguments are separated by space, the program does not support the path that contains space character*
 
       <command> : = <cmd> [<SPACE> <args>] <NULL>
 
@@ -78,9 +78,9 @@
 
 ### Users
 
-- There are three users avaliable in this project, in which **admin is the root user** who does not need to enter password to login and change directory.
+- There are three users available in this project, in which **admin is the root user** who does not need to enter a password to log in and change directory.
 
-- In contrast, **user1 and user2 are standard users**, when changing the working directory, re-entering account and password is required.
+- In contrast, **user1 and user2 are standard users**; when changing the working directory, re-entering account and password is required.
 
     | USER  | ACCT  |  PASS |
     | ----- | :---: | ----: |
@@ -90,17 +90,17 @@
 
 ### Protection
 
-- The program has password protection, which means you need to login to perform certain actions
-  - You only can send following commands if you are not login
+- The program has password protection, which means you need to log in to perform specific actions
+  - You only can send the following commands if you are not logged in
     1. `DONE`
     2. `USER`
     3. `ACCT`
     4. `PASS`
-  - Re-login will be required after perform `CDIR` without using root user
+  - Re-login will be required after performing `CDIR` without using the root user
 
 ## 5. Example
 
-> The following is an example of file transfer
+> The following is an example of the file transfer
 
         Simple FTP Server, Enter Ctrl+C and press Enter to exit
         >SFTP Server：+You are connected, greeting from [serverName]
@@ -185,7 +185,7 @@
 - Windows
     1. `netstat -ano`
 
-After find the PID of the process, you can stop the program by using kill command
+After finding the PID of the process, you can terminate the program by using the kill command.
 
 > Kill the process
 
