@@ -1,7 +1,7 @@
 #!/bin/bash
 gcc client/client.c -o client/client && gcc server/server.c -o server/server
 
-./server/server 5005 &
+cd server && ./server 5005 &>/dev/null &
 
-clear
-./client/client localhost 5005
+pwd
+cd client && ./client localhost 5005
