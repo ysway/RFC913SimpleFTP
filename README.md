@@ -102,7 +102,7 @@
 
 > The following is an example of the file transfer
 
-        Simple FTP Server, Enter Ctrl+C and press Enter to exit
+        Simple FTP client, Enter Ctrl+C and press Enter to exit
         >SFTP Server：+You are connected, greeting from [serverName]
         >SFTP Client: USER user1
         >SFTP Server：+User-id valid, send account and password
