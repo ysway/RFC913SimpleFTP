@@ -40,7 +40,7 @@ int main(int argc,char *argv[])
         puts("Usage: ./client ip port\nExample:./client 127.0.0.1 5005\n"); return -1;
     }
 
-    puts("Simple FTP Server, Enter Ctrl+C and press Enter to exit");
+    puts("Simple FTP Client, Enter Ctrl+C and press Enter to exit");
     
     signal(SIGINT, intHandler);
 
