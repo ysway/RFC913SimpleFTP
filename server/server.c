@@ -142,25 +142,25 @@ int main(int argc,char *argv[])
     user2->prevUser = user1;
     user2->nextUser = NULL;
     
+    // Create socket of server
+    int listenfd;
+    if ( (listenfd = socket(AF_INET,SOCK_STREAM,0))==-1) { perror("socket"); return -1; }
+
+    // Bind address and port of server
+    struct sockaddr_in servaddr;
+    memset(&servaddr,0,sizeof(servaddr));
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_addr.s_addr = htonl(INADDR_ANY); // Any IP address
+    //servaddr.sin_addr.s_addr = inet_addr("192.168.190.134"); // Specify the IP address
+    servaddr.sin_port = htons(atoi(argv[1])); // Define the port
+    if (bind(listenfd,(struct sockaddr *)&servaddr,sizeof(servaddr)) != 0 )
+    { perror("bind"); close(listenfd); return -1; }
+
+    // Set socket to listening mode
+    if (listen(listenfd,5) != 0 ) { perror("listen"); close(listenfd); return -1; }
+    
     while(1)
     {
-        // Create socket of server
-        int listenfd;
-        if ( (listenfd = socket(AF_INET,SOCK_STREAM,0))==-1) { perror("socket"); return -1; }
-
-        // Bind address and port of server
-        struct sockaddr_in servaddr;
-        memset(&servaddr,0,sizeof(servaddr));
-        servaddr.sin_family = AF_INET;
-        servaddr.sin_addr.s_addr = htonl(INADDR_ANY); // Any IP address
-        //servaddr.sin_addr.s_addr = inet_addr("192.168.190.134"); // Specify the IP address
-        servaddr.sin_port = htons(atoi(argv[1])); // Define the port
-        if (bind(listenfd,(struct sockaddr *)&servaddr,sizeof(servaddr)) != 0 )
-        { perror("bind"); close(listenfd); return -1; }
-
-        // Set socket to listening mode
-        if (listen(listenfd,5) != 0 ) { perror("listen"); close(listenfd); return -1; }
-
         // Accept incoming connection
         int clientfd; // Client socket。
         int socklen=sizeof(struct sockaddr_in);
@@ -406,8 +406,8 @@ int main(int argc,char *argv[])
                                     // sym link might cause error
                                     if (!strcmp(lsPwd, "/")) sprintf(pipeArgs, "%s %s", "ls", lsPwd);
                                     else sprintf(pipeArgs, "%s %s", "ls -l", lsPwd);
-								#else
-									// __CYGWIN__
+                                #else
+                                    // __CYGWIN__
                                     sprintf(pipeArgs, "%s %s", "ls -l", lsPwd);
                                 #endif
                                 pathFp = popen(pipeArgs, "r");
@@ -738,6 +738,7 @@ int main(int argc,char *argv[])
             printf("Send: %s\n", messageBuffer);
         }
         // Close the socket, free the resources
-        close(listenfd); close(clientfd); puts(""); sleep(5);
+        close(clientfd); puts(""); sleep(5);
     }
+    close(listenfd); 
 }
