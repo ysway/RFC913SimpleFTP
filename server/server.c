@@ -738,7 +738,7 @@ int main(int argc,char *argv[])
             printf("Send: %s\n", messageBuffer);
         }
         // Close the socket, free the resources
-        close(clientfd); puts(""); sleep(5);
+        close(clientfd); puts("");
     }
     close(listenfd); 
 }
