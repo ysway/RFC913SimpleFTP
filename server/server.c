@@ -159,6 +159,8 @@ int main(int argc,char *argv[])
     // Set socket to listening mode
     if (listen(listenfd,5) != 0 ) { perror("listen"); close(listenfd); return -1; }
     
+    // fork and allow up to 4 clients connect simultaneously
+    fork(); fork();
     while(1)
     {
         // Accept incoming connection
@@ -166,7 +168,7 @@ int main(int argc,char *argv[])
         int socklen=sizeof(struct sockaddr_in);
         struct sockaddr_in clientaddr; // Client address
         clientfd=accept(listenfd,(struct sockaddr *)&clientaddr,(socklen_t*)&socklen);
-        printf("=== Client (%s) is Connected ===\n", inet_ntoa(clientaddr.sin_addr));
+        printf("=== [%05d] Client (%s) is Connected ===\n", getpid(), inet_ntoa(clientaddr.sin_addr));
         
         // Flags and temp variables
         int fd, iret;
@@ -207,8 +209,8 @@ int main(int argc,char *argv[])
         gethostname(hostname, sizeof(hostname));
         sprintf(messageBuffer, "+You are connected, greeting from %s", hostname);
         if ( (iret=send(clientfd,messageBuffer,strlen(messageBuffer),0))<=0) { perror("send"); break; }
-        puts("Greeting Message Sent");
-
+        printf("[%05d]Greeting Message Sent", getpid());
+    
         // Communication
         while (1)
         {
@@ -217,7 +219,7 @@ int main(int argc,char *argv[])
             {
                 printf("iret=%d\n", iret); break;
             }
-            printf("Receive: %s\n", messageBuffer);
+            printf("[%05d]Receive: %s\n", getpid(), messageBuffer);
 
             // Get first argument
             userArgs = strtok(messageBuffer," \r\n\t");
@@ -226,7 +228,7 @@ int main(int argc,char *argv[])
             {
                 sprintf(messageBuffer, "+%s closing connection", hostname);
                 if ( (iret=send(clientfd,messageBuffer,strlen(messageBuffer),0))<=0) { perror("send"); break; }
-                printf("Send: %s\n\n=== Client (%s) Exit ===\n", messageBuffer, inet_ntoa(clientaddr.sin_addr));
+                printf("[%05d]Send: %s\n\n=== Client (%s) Exit ===\n", getpid(),  messageBuffer, inet_ntoa(clientaddr.sin_addr));
                 free(hostname);
                 break;
             }
@@ -578,7 +580,7 @@ int main(int argc,char *argv[])
                             fd = open(rsFilePathBuffer, O_RDONLY);
                             if (fd == -1 || fstat(fd, &fileStat) < 0)
                             {
-                                fprintf(stderr, "FATAL ERROR: FILE CAN NOT BE OPENED\n");
+                                fprintf(stderr, "[%05d]FATAL ERROR: FILE CAN NOT BE OPENED\n", getpid());
                                 break;
                             } else {
                                 remainData = fileStat.st_size;
@@ -605,11 +607,11 @@ int main(int argc,char *argv[])
                                 }
                                 bzero(sendBuffer, BUFSIZ);
                             #endif
-                                fprintf(stdout, "MSG: FILE SENT\n");
+                                fprintf(stdout, "[%05d]MSG: FILE SENT\n", getpid());
                             }
-                        } else fprintf(stdout, "MSG: FILE CREATED\n");    
+                        } else fprintf(stdout, "[%05d]MSG: FILE CREATED\n", getpid());    
                     } else {
-                        fprintf(stderr, "FATAL ERROR: FILE DOES NOT EXIST\n");
+                        fprintf(stderr, "[%05d]FATAL ERROR: FILE DOES NOT EXIST\n, getpid()");
                         break;
                     }
                     memset(rsFilePathBuffer, 0, sizeof(rsFilePathBuffer));
@@ -710,7 +712,7 @@ int main(int argc,char *argv[])
                                 strcpy(messageBuffer, "+ok, waiting for file");
                                 if ((iret=send(clientfd, messageBuffer, strlen(messageBuffer), 0)) <= 0) // Send response to client
                                 { perror("send"); break; }
-                                printf("Send: %s\n", messageBuffer);
+                                printf("[%05d]Send: %s\n", getpid(), messageBuffer);
 
                                 if (remainData)
                                 {
@@ -735,7 +737,7 @@ int main(int argc,char *argv[])
             //========================================================================================//
             if ((iret=send(clientfd, messageBuffer, strlen(messageBuffer), 0)) <= 0) // Send response to client
             { perror("send"); break; }
-            printf("Send: %s\n", messageBuffer);
+            printf("[%05d]Send: %s\n", getpid(), messageBuffer);
         }
         // Close the socket, free the resources
         close(clientfd); puts("");
