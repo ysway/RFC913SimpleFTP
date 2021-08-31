@@ -54,7 +54,7 @@
 > Go to the root directory
 
 - unixRun.sh: unix system only, with terminal application installed
-  - Open terminal, execute `chmod +x unnixRun.sh && ./unixRun.sh`
+  - Open terminal, execute `chmod +x unixRun.sh && ./unixRun.sh`
 
 - winRun.bat: windows system with **cygwin env in path**
   - Double click the batch file to run
