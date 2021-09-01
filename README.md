@@ -103,19 +103,19 @@
 > The following is an example of the file transfer
 
         Simple FTP Client, Enter Ctrl+C and press Enter to exit
-        >SFTP Server：+You are connected, greeting from [serverName]
+        >SFTP Server: +You are connected, greeting from [serverName]
         >SFTP Client: USER user1
-        >SFTP Server：+User-id valid, send account and password
+        >SFTP Server: +User-id valid, send account and password
         >SFTP Client: ACCT user1
-        >SFTP Server：+Account valid, send password
+        >SFTP Server: +Account valid, send password
         >SFTP Client: PASS user2
-        >SFTP Server：-Wrong password, try again
+        >SFTP Server: -Wrong password, try again
         >SFTP Client: PASS user1
-        >SFTP Server：!Logged in
+        >SFTP Server: !Logged in
         >SFTP Client: TYPE B
-        >SFTP Server：+Using Binary mode
+        >SFTP Server: +Using Binary mode
         >SFTP Client: LIST F
-        >SFTP Server：+Listing Files in </home/username/sftp/server/>
+        >SFTP Server: +Listing Files in </home/username/sftp/server/>
                         apps
                         empty
                         rms
@@ -123,38 +123,38 @@
                         server.c
                         srm
         >SFTP Client: CDIR ../client
-        >SFTP Server：+directory ok, send account/password
+        >SFTP Server: +directory ok, send account/password
         >SFTP Client: ACCT admin
-        >SFTP Server：!Changed working dir to </home/username/sftp/client/>
+        >SFTP Server: !Changed working dir to </home/username/sftp/client/>
         >SFTP Client: LIST F
-        >SFTP Server：+Listing Files in </home/username/sftp/client/>
+        >SFTP Server: +Listing Files in </home/username/sftp/client/>
                         app
                         client
                         client.c
                         empty
                         rmF
         >SFTP Client: KILL rmF
-        >SFTP Server：+<rmF> deleted
+        >SFTP Server: +<rmF> deleted
         >SFTP Client: NAME empty
-        >SFTP Server：+File exists
+        >SFTP Server: +File exists
         >SFTP Client: TOBE empty_new
-        >SFTP Server：+<empty> renamed to <empty_new>
+        >SFTP Server: +<empty> renamed to <empty_new>
         >SFTP Client: LIST V
-        >SFTP Server：+Listing Files in </home/username/sftp/client/>
+        >SFTP Server: +Listing Files in </home/username/sftp/client/>
                         total 40
                         -rw-rw-r-- 1 user1 user1     9 Aug 28 19:27 app
                         -rwxrwxr-x 1 user1 user1 18288 Aug 31 05:09 client
                         -rw-rw-r-- 1 user1 user1 13880 Aug 31 05:12 client.c
                         -rw-rw-r-- 1 user1 user1     0 Aug 28 19:26 empty
         >SFTP Client: CDIR ../server
-        >SFTP Server：!Changed working dir to </home/username/sftp/server/>
+        >SFTP Server: !Changed working dir to </home/username/sftp/server/>
         >SFTP Client: RETR rms
-        >SFTP Server：6
+        >SFTP Server: 6
         >SFTP Client: SEND
         >SFTP Client: RETR app
-        >SFTP Server：-File doesn’t exist
+        >SFTP Server: -File doesn’t exist
         >SFTP Client: LIST F
-        >SFTP Server：+Listing Files in </home/username/sftp/server/>
+        >SFTP Server: +Listing Files in </home/username/sftp/server/>
                         apps
                         empty_new
                         rms
@@ -162,16 +162,16 @@
                         server.c
                         srm
         >SFTP Client: RETR apps
-        >SFTP Server：7
+        >SFTP Server: 7
         >SFTP Client: STOP
-        >SFTP Server：+ok, RETR aborted
+        >SFTP Server: +ok, RETR aborted
         >SFTP Client: STOR NEW app
-        >SFTP Server：+File does not exist, will create new file
+        >SFTP Server: +File does not exist, will create new file
         >SFTP Client: SIZE [fileSize]
-        >SFTP Server：+ok, waiting for file
-        >SFTP Server：+Saved </home/username/sftp/server/app>
+        >SFTP Server: +ok, waiting for file
+        >SFTP Server: +Saved </home/username/sftp/server/app>
         >SFTP Client: DONE
-        >SFTP Server：+[serverName] closing connection
+        >SFTP Server: +[serverName] closing connection
 
         == EXIT ==
 

@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
     {
         printf("iret=%d\n", iret);
     }
-    printf(">SFTP Server：%s\n", messageBuffer);
+    printf(">SFTP Server: %s\n", messageBuffer);
 
     // get cwd
     getcwd(workPwd, sizeof(workPwd));
@@ -133,7 +133,7 @@ int main(int argc, char *argv[])
             {
                 printf("iret=%d\n", iret);
             }
-            printf(">SFTP Server：%s\n", messageBuffer);
+            printf(">SFTP Server: %s\n", messageBuffer);
             break;
         }
 
@@ -189,7 +189,7 @@ int main(int argc, char *argv[])
                     fclose(pathFp);
                 }
                 else
-                    fprintf(stderr, ">SFTP Server：%s\n", "Fatal Error, cannot create file");
+                    fprintf(stderr, ">SFTP Server: %s\n", "Fatal Error, cannot create file");
             }
             else
             {
@@ -268,7 +268,7 @@ int main(int argc, char *argv[])
                         {
                             printf("iret=%d\n", iret);
                         }
-                        printf(">SFTP Server：%s\n", messageBuffer);
+                        printf(">SFTP Server: %s\n", messageBuffer);
                         break;
                     }
 
@@ -350,7 +350,7 @@ int main(int argc, char *argv[])
         }
         else if (sizeFlag)
         {
-            printf(">SFTP Server：%s\n", messageBuffer);
+            printf(">SFTP Server: %s\n", messageBuffer);
             // Couldn't save or not enough space
             if (!strncmp(messageBuffer, "-", 1))
             {
@@ -427,7 +427,7 @@ int main(int argc, char *argv[])
                 break;
             }
         }
-        printf(">SFTP Server：%s\n", messageBuffer);
+        printf(">SFTP Server: %s\n", messageBuffer);
     }
 
     // close socket
